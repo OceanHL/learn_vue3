@@ -10,8 +10,10 @@
     <div id="app"></div>
 
     <template id="my-app">
-      <h2 v-if="isShow">hahahah</h2>
-      <button @click="toggle">切换</button>
+      <!-- v-if 条件为 false 时，不会被渲染【标签不存在】 -->
+      <h2 v-if="isShow">哈哈哈</h2>
+      <!-- v-show 条件为 false 时，会被渲染但是将 display 设置为 none -->
+      <h2 v-show="isShow">呵呵呵</h2>
     </template>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
@@ -20,13 +22,8 @@
         template: `#my-app`,
         data() {
           return {
-            isShow: true,
+            isShow: false,
           };
-        },
-        methods: {
-          toggle() {
-            this.isShow = !this.isShow;
-          },
         },
       };
 

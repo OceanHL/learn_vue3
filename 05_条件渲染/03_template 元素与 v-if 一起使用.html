@@ -10,8 +10,17 @@
     <div id="app"></div>
 
     <template id="my-app">
-      <h2 v-if="isShow">hahahah</h2>
-      <button @click="toggle">切换</button>
+      <!-- template 不会被浏览器渲染 -->
+      <template v-if="isShowHa">
+        <h2>哈哈哈</h2>
+        <h2>哈哈哈</h2>
+        <h2>哈哈哈</h2>
+      </template>
+      <template v-else>
+        <h2>呵呵呵</h2>
+        <h2>呵呵呵</h2>
+        <h2>呵呵呵</h2>
+      </template>
     </template>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
@@ -20,13 +29,8 @@
         template: `#my-app`,
         data() {
           return {
-            isShow: true,
+            isShowHa: true,
           };
-        },
-        methods: {
-          toggle() {
-            this.isShow = !this.isShow;
-          },
         },
       };
 

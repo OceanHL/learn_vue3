@@ -10,8 +10,12 @@
     <div id="app"></div>
 
     <template id="my-app">
-      <h2 v-if="isShow">hahahah</h2>
-      <button @click="toggle">切换</button>
+      <input type="text" v-model.number="score" />
+      <!-- 大于 90 -->
+      <h2 v-if="score >= 90">优秀</h2>
+      <!-- 60 < score < 90 -->
+      <h2 v-else-if="score >= 60 ">良好</h2>
+      <h2 v-else>不及格</h2>
     </template>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
@@ -20,13 +24,8 @@
         template: `#my-app`,
         data() {
           return {
-            isShow: true,
+            score: 90,
           };
-        },
-        methods: {
-          toggle() {
-            this.isShow = !this.isShow;
-          },
         },
       };
 

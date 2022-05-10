@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 错误用法：语句  -->
+      <h2>{{var name = "abc"}}</h2>
+      <h2>{{if(isShow) {return '哈哈哈'}}}</h2>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            counter: 100,
+            message: 'Hello World',
+            isShow: true,
+          };
+        },
+        methods: {
+          getReverseMessage() {
+            return this.message.split(' ').reverse().join(' ');
+          },
+          toggle() {
+            this.isShow = !this.isShow;
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

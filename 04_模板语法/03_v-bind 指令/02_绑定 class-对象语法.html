@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        background-color: pink;
+      }
+      .skyblue {
+        color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 普通绑定 -->
+      <div :class="className">哈哈哈</div>
+      <!-- 对象语法 { '类名': boolean } -->
+      <div :class="classNameObj">呵呵呵</div>
+      <!-- 利用计算属性获取响应属性 -->
+      <div :class="{active: true, [title]: true}">呵呵呵</div>
+      <button @click="toggle">切换</button>
+
+      <!-- 静态 class 与 动态 class 集合在一起-->
+      <div class="abc cba" :class="{active: true, [title]: true}">呵呵呵呵</div>
+
+      <!-- 将对象放到一个单独的属性中 -->
+      <div class="abc cba" :class="classNameObj">呵呵呵呵</div>
+
+      <!-- 将对象放到一个 methods 中 -->
+      <div class="abc cba" :class="getClassObj()">呵呵呵呵</div>
+
+      <div class="abc cba" :class="getClassObj()">呵呵呵呵</div>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          // data 属性不允许相互引用
+          return {
+            className: 'skyblue',
+            classNameObj: {
+              active: true, // 拥有 active 类
+              skyblue: true,
+            },
+            title: 'test',
+          };
+        },
+        methods: {
+          toggle() {
+            this.classNameObj.active = !this.classNameObj.active;
+          },
+          getClassObj() {
+            return {
+              active: true, // 拥有 active 类
+              skyblue: true,
+            };
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

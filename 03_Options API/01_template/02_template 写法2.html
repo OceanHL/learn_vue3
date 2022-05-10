@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="why">
+      <div>
+        <h2>{{counter}}</h2>
+        <button @click="increment">+1</button>
+        <button @click="decrement">-1</button>
+        <button @click="btn">test</button>
+        <button @click="btn2">test2</button>
+      </div>
+    </template>
+    <script src="../vue@3.2.31.js"></script>
+    <script>
+      Vue.createApp({
+        template: `#why`, // 以 # 开头，则使用 querySelector 查找元素
+        data() {
+          return {
+            counter: 100,
+          };
+        },
+        // methods 没有缓存，computed 有缓存
+        methods: {
+          increment() {
+            this.counter++;
+            console.log('this: ', this);
+          },
+          decrement() {
+            this.counter--;
+          },
+          btn: () => {
+            // 箭头函数不绑定 this, 指向【父作用域的上下文】
+            console.log('this: ', this); // window
+          },
+          btn2: function () {
+            console.log('this: ', this); // Proxy
+          },
+        },
+      }).mount('#app');
+
+      const info = { name: 'why' };
+      function bar() {
+        console.log('bar this: ', this);
+      }
+      // 显式绑定
+      const newBar = bar.bind(info);
+      newBar();
+    </script>
+  </body>
+</html>

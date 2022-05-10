@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 静态 style -->
+      <div style="color: red">哈哈哈</div>
+      <!-- 对象语法: { cssPropertyName: cssPropertyValue } -->
+      <!-- 驼峰命名 或 -连接 -->
+      <div :style="{color: finalColor, 'font-size': '30px'}">哈哈哈哈</div>
+      <div :style="{color: finalColor, fontSize: '30px'}">哈哈哈哈</div>
+      <div :style="{color: finalColor, fontSize: `${finalFontSize}px`}">
+        哈哈哈哈
+      </div>
+      <!-- data 属性返回【对象】 -->
+      <div :style="finalStyleObj">哈哈哈哈1</div>
+      <!-- method 方法返回【对象】 -->
+      <div :style="getFinalStyleObj()">哈哈哈哈2</div>
+    </template>
+
+    <script src="../vue@3.2.31.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            message: 'Hello World',
+            finalColor: 'red',
+            finalFontSize: 50,
+            finalStyleObj: {
+              fontSize: '50px',
+              fontWeight: 700,
+              backgroundColor: 'pink',
+            },
+          };
+        },
+        methods: {
+          getFinalStyleObj() {
+            return {
+              fontSize: '50px',
+              fontWeight: 700,
+              backgroundColor: 'pink',
+            };
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

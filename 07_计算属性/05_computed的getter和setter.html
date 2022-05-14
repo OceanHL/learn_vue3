@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <button @click="changeFullName">修改firstName</button>
+      <h2>{{fullName}}</h2>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            firstName: 'Kobe',
+            lastName: 'Bryant',
+          };
+        },
+        computed: {
+          // fullName 的 getter 方法
+          //   fullName() {
+          //     return this.firstName + ' ' + this.lastName;
+          //   },
+
+          //【完整写法】
+          fullName: {
+            get(publicThis) {
+              console.log('publicThis', publicThis); // 组件实例对象
+              return this.firstName + ' ' + this.lastName;
+            },
+            set(newValue) {
+              console.log('newValue', newValue);
+              const names = newValue.split(' ');
+              this.firstName = names[0];
+              this.lastName = names[1];
+            },
+          },
+        },
+        methods: {
+          changeFullName() {
+            // 直接修改【计算属性】，调用 setter 方法
+            this.fullName = 'Coder Why';
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

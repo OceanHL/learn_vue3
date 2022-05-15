@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>{{info.name}}</h2>
+      <h2>{{friends[0].name}}</h2>
+      <button @click="changeName">改变info.name</button>
+      <button @click="changeFriendsName">改变friends[0].name</button>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            info: {
+              name: 'kobe',
+            },
+            friends: [
+              {
+                name: 'why',
+              },
+              {
+                name: 'kobe',
+              },
+            ],
+          };
+        },
+        watch: {
+          'info.name'(newInfoName, oldInfoName) {
+            console.log(
+              'newInfoName: ',
+              newInfoName,
+              'oldInfoName: ',
+              oldInfoName
+            );
+          },
+        },
+        methods: {
+          changeName() {
+            this.info.name = 'james';
+          },
+          changeFriendsName() {
+            this.friends[0].name = 'james';
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>{{name}}</h2>
+      <button @click="changeName">改变name</button>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            name: 'kobe',
+          };
+        },
+        watch: {
+          name: 'watchNameMethod', // 绑定方法
+        },
+        methods: {
+          // 监听 name 变化的【侦听方法】
+          watchNameMethod(newName, oldName) {
+            console.log('newName: ', newName, 'oldName: ', oldName);
+          },
+          changeName() {
+            this.name = 'james';
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

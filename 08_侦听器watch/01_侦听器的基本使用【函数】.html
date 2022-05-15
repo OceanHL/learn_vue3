@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      您的问题: <input type="text" v-model="question" />
+      <button @click="queryAnswer">查找答案</button>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            // 侦听 question 的变化，然后进行一些逻辑的处理
+            question: 'Hello World',
+            answer: '',
+          };
+        },
+        methods: {
+          queryAnswer() {
+            console.log(`您的问题${this.question}的答案是哈哈哈`);
+            this.answer = '';
+          },
+        },
+        watch: {
+          /* 
+            question 是 data 中的属性名称
+            newValue 是变化后的新值
+            oldValue 是变化前的旧值
+          */
+          question(newValue, oldValue) {
+            console.log('新值', newValue);
+            console.log('旧值', oldValue);
+            this.queryAnswer();
+            // this.question = newValue; // 值没有变化，则不会触发
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

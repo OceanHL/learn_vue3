@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 1. 绑定 textarea -->
+      <label for="intro">
+        自我介绍:
+        <textarea
+          name="intro"
+          id="intro"
+          cols="30"
+          rows="10"
+          v-model="intro"
+        ></textarea>
+      </label>
+      <h2>intro: {{intro}}</h2>
+
+      <!-- 2. checkbox -->
+      <!-- 2.1 单选框 -->
+      <label for="agree">
+        <input type="checkbox" name="agree" id="agree" v-model="isAgree" />
+        同意协议
+      </label>
+      <h2>isAgree: {{isAgree}}</h2>
+
+      <!-- 2.1 多选框【必须设置value属性】 -->
+      <span>你的爱好:</span>
+      <label for="basketball">
+        <input
+          type="checkbox"
+          id="basketball"
+          v-model="hobbies"
+          value="basketball"
+        />
+        篮球
+      </label>
+      <label for="football">
+        <input
+          type="checkbox"
+          id="football"
+          v-model="hobbies"
+          value="football"
+        />
+        足球
+      </label>
+      <label for="tennis">
+        <input type="checkbox" id="tennis" v-model="hobbies" value="tennis" />
+        网球
+      </label>
+      <h2>hobbies: {{hobbies}}</h2>
+
+      <!-- 3. radio【绑定同一个响应数据，则会自动进行互斥】 -->
+      <span>性别:</span>
+      <label for="male">
+        <input type="radio" id="male" v-model="gender" value="male" />
+        男
+      </label>
+      <label for="female">
+        <input type="radio" id="female" v-model="gender" value="female" />
+        女
+      </label>
+      <h2>gender: {{gender}}</h2>
+
+      <!-- 4. select -->
+      <span>喜欢的水果: </span>
+      <select name="" id="" v-model="fruit" multiple size="2">
+        <option value="apple">苹果</option>
+        <option value="orange">橙子</option>
+        <option value="banana">香蕉</option>
+      </select>
+      <h2>fruit: {{fruit}}</h2>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            intro: 'Hello World',
+            isAgree: false,
+            hobbies: [],
+            gender: '',
+            fruit: 'apple', // 设置初始值
+          };
+        },
+        methods: {
+          commitForm() {
+            axios.post('', {});
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

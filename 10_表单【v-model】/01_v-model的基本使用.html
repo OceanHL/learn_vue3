@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 1. v-bind:value 的绑定 2. 监听input事件，更新message值 -->
+      <!-- <input type="text" v-bind:value="message" @input="inputChange" /> -->
+
+      <!-- v-model 是 value 属性和 input 事件的【语法糖】 -->
+      <input type="text" v-model="message" />
+      <h2>{{message}}</h2>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            message: 'Hello World',
+          };
+        },
+        methods: {
+          inputChange(e) {
+            this.message = e.target.value;
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

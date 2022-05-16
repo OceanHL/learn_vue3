@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 1. lazy 修饰符，将 input 事件变为 change 事件 -->
+      <!-- <input type="text" v-model.lazy="message" /> -->
+
+      <!-- 2. number 修饰符，会截取到非数字前面 -->
+      <!-- v-model 默认是将【字符串类型】赋值给【响应数据】 -->
+      <!-- (1). 可将 type 设置为 number 类型 -->
+      <!-- (2). 使用 number 修饰符 -->
+      <!-- <input type="number" v-model="message" />
+      <input type="text" v-model.number="message" />
+      <h2>{{message}}</h2>
+      <button @click="showType">查看 message 的数据类型</button> -->
+
+      <!-- 3. trim 修饰符, 去除左右多余空格 -->
+      <input type="text" v-model.trim="message" />
+      <button @click="showResult">查看结果</button>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+        data() {
+          return {
+            message: 'Hello World',
+          };
+        },
+        methods: {
+          showType() {
+            console.log(this.message, typeof this.message);
+          },
+          showResult() {
+            console.log(this.message);
+          },
+        },
+      };
+
+      Vue.createApp(App).mount('#app');
+    </script>
+  </body>
+</html>

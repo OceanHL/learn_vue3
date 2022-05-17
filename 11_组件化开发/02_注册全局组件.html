@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- App 根组件 -->
+    <template id="my-app">
+      <!-- 必须是【双标签】使用 -->
+      <component-a></component-a>
+      <component-a></component-a>
+      <component-a></component-a>
+      <component-a></component-a>
+
+      <component-b></component-b>
+
+      <component-c></component-c>
+      <!-- 在 DOM 中只能使用 kebab-case【短横线分割】 -->
+      <!-- <ComponentC></ComponentC> -->
+    </template>
+
+    <!-- component-a 组件 -->
+    <template id="component-a">
+      <h2>{{title}}</h2>
+      <h2>{{desc}}</h2>
+      <button @click="btnClick">点击</button>
+    </template>
+
+    <!-- component-b 组件 -->
+    <template id="component-b">
+      <input type="text" v-model="message" />
+      <h2>{{message}}</h2>
+    </template>
+
+    <template id="component-c">
+      <h2>ComponentC</h2>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.33/vue.global.min.js"></script>
+    <script>
+      const App = {
+        template: `#my-app`,
+      };
+
+      const app = Vue.createApp(App);
+
+      /* 
+        使用 app.component 方法注册一个全局组件
+            - app.component(组件名称, 组件对象);
+        全局组件: 该组件可以在任何【组件模板】中使用
+      */
+      app.component('component-a', {
+        template: `#component-a`,
+        data() {
+          return {
+            title: '我是标题',
+            desc: '我是内容, 哈哈哈',
+          };
+        },
+        methods: {
+          btnClick() {
+            console.log('点击了');
+            this.title += '1';
+          },
+        },
+      });
+
+      app.component('component-b', {
+        template: '#component-b',
+        data() {
+          return {
+            message: 'Hello World',
+          };
+        },
+      });
+
+      app.component('ComponentC', {
+        template: '#component-c',
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>
